@@ -19,5 +19,12 @@ server.on('published', packet => {
       payload: JSON.parse(packet.payload)
     });
   }
+
+  if (packet.topic === 'luminosity') {
+    db.post({
+      topic: packet.topic,
+      payload: JSON.parse(packet.payload)
+    });
+  }
 });
 //# sourceMappingURL=index.js.map

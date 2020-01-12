@@ -9,9 +9,16 @@ var _mraa = require("mraa");
 
 var _B = 4275;
 var _R0 = 100000;
+/**
+ * @return {object} Object containing functions. 
+ * @param {number} analogicPort 
+ */
 
-function GrooveTemperature(analogicPort) {
+function GroveTemperature(analogicPort) {
   var port = new _mraa.Aio(analogicPort);
+  /**
+   * @return {number} The temperature in degreees Celsius
+   */
 
   function temperatureInCelsius() {
     var reading = port.read();
@@ -25,5 +32,6 @@ function GrooveTemperature(analogicPort) {
   };
 }
 
-var _default = GrooveTemperature;
+var _default = GroveTemperature;
 exports.default = _default;
+//# sourceMappingURL=GroveTemperature.js.map
