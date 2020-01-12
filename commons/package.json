@@ -1,0 +1,9 @@
+{
+  "name": "myiothome-commons",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "compile": "babel src --out-dir lib --source-maps"
+  },
+  "license": "MIT"
+}
