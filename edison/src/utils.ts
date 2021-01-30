@@ -1,9 +1,5 @@
-/**
- * @param {number} threshold
- * @return {function}
- */
-function thresholder(threshold) {
-  const currentValue = Number.NaN;
+function thresholder(threshold: number): (newValue: number) => boolean {
+  let currentValue = Number.NaN;
 
   return (newValue) => {
     const min = currentValue - threshold;
