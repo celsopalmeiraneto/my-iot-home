@@ -3,13 +3,13 @@ const presets = [
     "@babel/env",
     {
       targets: {
-        node: "4"
-      }
-    }
-  ]
+        node: "4",
+      },
+    },
+  ],
 ];
 
 module.exports = {
   extends: "../babel.config.js",
-  presets
+  presets,
 };

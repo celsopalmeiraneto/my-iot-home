@@ -4,8 +4,8 @@ const _B = 4275;
 const _R0 = 100000;
 
 /**
- * @return {object} Object containing functions. 
- * @param {number} analogicPort 
+ * @return {object} Object containing functions.
+ * @param {number} analogicPort
  */
 function GroveTemperature(analogicPort) {
   const port = new Aio(analogicPort);

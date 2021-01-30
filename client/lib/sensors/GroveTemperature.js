@@ -10,8 +10,8 @@ var _mraa = require("mraa");
 var _B = 4275;
 var _R0 = 100000;
 /**
- * @return {object} Object containing functions. 
- * @param {number} analogicPort 
+ * @return {object} Object containing functions.
+ * @param {number} analogicPort
  */
 
 function GroveTemperature(analogicPort) {

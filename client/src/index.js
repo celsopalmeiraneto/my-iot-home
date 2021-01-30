@@ -1,11 +1,8 @@
-import {connect} from 'mqtt';
 import GroveTemperature from './sensors/GroveTemperature';
 import Temperature from 'myiothome-commons/lib/Temperature';
 import GroveLight from './sensors/GroveLight';
 import Luminosity from 'myiothome-commons/lib/Luminosity';
-import { thresholder } from './utils';
-
-const mqttClient = connect(process.env.MQTT_SERVER);
+import {thresholder} from './utils';
 
 const aIOTemperature = parseInt(process.env.AIO_TEMP_SENSOR);
 const temperatureSensor = new GroveTemperature(aIOTemperature);
@@ -17,7 +14,7 @@ setInterval(() => {
   const temperatureReading = temperatureSensor.temperatureInCelsius();
   const temp = new Temperature(new Date(), temperatureReading);
 
-  mqttClient.publish('temperature', JSON.stringify(temp));
+  console.log('Temp', temp);
 }, (parseInt(process.env.INTERVAL_TEMP_COLLECTION_SECS) || 1) * 1000);
 
 
@@ -27,8 +24,7 @@ setInterval(() => {
 
   if (changedLuminosity(lightInLumens)) {
     const light = new Luminosity(new Date(), lightInLumens);
-
-    mqttClient.publish('luminosity', JSON.stringify(light));
+    console.log('light', light);
   }
 }, 1000);
 

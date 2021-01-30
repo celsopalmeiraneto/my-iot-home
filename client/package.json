@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mqtt": "^3.0.0",
     "myiothome-commons": "1.0.0"
   },
   "devDependencies": {
