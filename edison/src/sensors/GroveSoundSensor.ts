@@ -1,6 +1,5 @@
 import { Microphone, uint16Array, thresholdContext } from 'jsupm_mic';
 import { Transmitter } from '../types';
-import { thresholder } from '../utils';
 import { Sensor } from './Sensor';
 
 var threshCtx = new thresholdContext;
@@ -21,15 +20,14 @@ class GroveSoundSensor extends Sensor {
 
   read() {
     const startTime = Date.now()
-    while(Date.now() < startTime + 200) {
-      let buffer = new uint16Array(128)
-      let len = this.mic.getSampledWindow(2, 128, buffer)
-      if (len) {
-        var thresh = this.mic.findThreshold(threshCtx, 30, buffer, len);
-        if (thresh) {
-          return thresh
-        }
-      }  
+    while(Date.now() < startTime + 500) {
+      const buffer = new uint16Array(128)
+      const len = this.mic.getSampledWindow(2, 128, buffer)
+
+      if (!len) continue
+
+      const thresh = this.mic.findThreshold(threshCtx, 30, buffer, len);
+      if (thresh) return thresh
     }
 
     return 0

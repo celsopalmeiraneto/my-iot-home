@@ -16,14 +16,13 @@ class GroveSoundSensor extends Sensor_1.Sensor {
     read() {
         const startTime = Date.now();
         while (Date.now() < startTime + 200) {
-            let buffer = new jsupm_mic_1.uint16Array(128);
-            let len = this.mic.getSampledWindow(2, 128, buffer);
-            if (len) {
-                var thresh = this.mic.findThreshold(threshCtx, 30, buffer, len);
-                if (thresh) {
-                    return thresh;
-                }
-            }
+            const buffer = new jsupm_mic_1.uint16Array(128);
+            const len = this.mic.getSampledWindow(2, 128, buffer);
+            if (!len)
+                continue;
+            const thresh = this.mic.findThreshold(threshCtx, 30, buffer, len);
+            if (thresh)
+                return thresh;
         }
         return 0;
     }

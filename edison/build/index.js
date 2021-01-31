@@ -30,7 +30,7 @@ const temperatureSensor = new GroveTemperature_1.default(aIOTemperature, transmi
 const aIOLight = parseInt(process.env.AIO_LIGHT_SENSOR || '-1');
 const lightSensor = new GroveLight_1.default(aIOLight, transmitterFactory('Light', 1));
 const aIOSound = parseInt(process.env.AIO_SOUND_SENSOR || '-1');
-const soundSensor = new GroveSoundSensor_1.default(aIOSound, transmitterFactory('Sound', 1));
+const soundSensor = new GroveSoundSensor_1.default(aIOSound, transmitterFactory('Sound', 50));
 temperatureSensor.start();
 lightSensor.start();
 soundSensor.start();
