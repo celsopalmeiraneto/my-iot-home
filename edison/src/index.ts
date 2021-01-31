@@ -1,26 +1,16 @@
 import GroveTemperature from './sensors/GroveTemperature';
 import GroveLight from './sensors/GroveLight';
-import {thresholder} from './utils';
+import { Transmitter } from './types';
+
+const transmitter: Transmitter = async (reading, unit) => {
+  console.log(new Date(), reading, `${reading} ${unit}`)
+}
 
 const aIOTemperature = parseInt(process.env.AIO_TEMP_SENSOR || '-1');
-const temperatureSensor = new GroveTemperature(aIOTemperature);
+const temperatureSensor = new GroveTemperature(aIOTemperature, transmitter);
 
-const aIOLight = parseInt(process.env.AIO_TEMP_SENSOR || '-1');
-const lightSensor = new GroveLight(aIOLight);
+const aIOLight = parseInt(process.env.AIO_LIGHT_SENSOR || '-1');
+const lightSensor = new GroveLight(aIOLight, transmitter);
 
-setInterval(() => {
-  const temperatureReading = temperatureSensor.temperatureInCelsius();
-
-  console.log('Temp', temperatureReading);
-}, (parseInt(process.env.INTERVAL_TEMP_COLLECTION_SECS || '1')) * 1000);
-
-
-const changedLuminosity = thresholder(1);
-setInterval(() => {
-  const lightInLumens = lightSensor.valueInLux();
-
-  if (changedLuminosity(lightInLumens)) {
-    console.log('light', lightInLumens);
-  }
-}, 1000);
-
+temperatureSensor.start()
+lightSensor.start()

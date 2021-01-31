@@ -4,7 +4,8 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "compile": "babel src --out-dir lib --source-maps"
+    "compile": "tsc",
+    "start": "node build/index.js"
   },
   "author": "",
   "license": "ISC",
