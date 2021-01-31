@@ -14,12 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const GroveTemperature_1 = __importDefault(require("./sensors/GroveTemperature"));
 const GroveLight_1 = __importDefault(require("./sensors/GroveLight"));
-const transmitter = (reading, unit) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(new Date(), reading, `${reading} ${unit}`);
-});
+const utils_1 = require("./utils");
+const transmitterFactory = (sensorName, threshold) => {
+    const checkIfShouldTransmit = utils_1.thresholder(threshold);
+    return (reading, unit) => __awaiter(void 0, void 0, void 0, function* () {
+        const shouldTransmit = checkIfShouldTransmit(reading);
+        if (shouldTransmit) {
+            console.log(new Date(), sensorName, `${reading} ${unit}`);
+        }
+    });
+};
 const aIOTemperature = parseInt(process.env.AIO_TEMP_SENSOR || '-1');
-const temperatureSensor = new GroveTemperature_1.default(aIOTemperature, transmitter);
+const temperatureSensor = new GroveTemperature_1.default(aIOTemperature, transmitterFactory('Temperature', 0.5));
 const aIOLight = parseInt(process.env.AIO_LIGHT_SENSOR || '-1');
-const lightSensor = new GroveLight_1.default(aIOLight, transmitter);
+const lightSensor = new GroveLight_1.default(aIOLight, transmitterFactory('Light', 1));
 temperatureSensor.start();
 lightSensor.start();
