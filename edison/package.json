@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "jsupm_light": "^1.0.2-src",
+    "jsupm_mic": "^1.0.2-src",
     "mraa": "^1.9.0"
   },
   "devDependencies": {

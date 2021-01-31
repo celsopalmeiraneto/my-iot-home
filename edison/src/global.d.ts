@@ -16,3 +16,17 @@ declare module 'jsupm_light' {
     value(): number
   }
 }
+
+declare module 'jsupm_mic' {
+  export const thresholdContext: any
+  export class uint16Array {
+    constructor(len: number)
+  }
+  export class Microphone extends Aio {
+    constructor(pin: number)
+
+    getSampledWindow(freqMS: number, numberOfSamples: number, buffer: uint16Array): number
+    findThreshold: any
+    printGraph: any
+  }
+}

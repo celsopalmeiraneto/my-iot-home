@@ -2,6 +2,7 @@ import GroveTemperature from './sensors/GroveTemperature';
 import GroveLight from './sensors/GroveLight';
 import { Transmitter } from './types';
 import { thresholder } from './utils';
+import GroveSoundSensor from './sensors/GroveSoundSensor';
 
 
 const transmitterFactory = (sensorName: string, threshold: number): Transmitter => {
@@ -22,5 +23,9 @@ const temperatureSensor = new GroveTemperature(aIOTemperature, transmitterFactor
 const aIOLight = parseInt(process.env.AIO_LIGHT_SENSOR || '-1');
 const lightSensor = new GroveLight(aIOLight, transmitterFactory('Light', 1));
 
+const aIOSound = parseInt(process.env.AIO_SOUND_SENSOR || '-1');
+const soundSensor = new GroveSoundSensor(aIOSound, transmitterFactory('Sound', 50));
+
 temperatureSensor.start()
 lightSensor.start()
+soundSensor.start()

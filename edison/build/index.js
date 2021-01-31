@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const GroveTemperature_1 = __importDefault(require("./sensors/GroveTemperature"));
 const GroveLight_1 = __importDefault(require("./sensors/GroveLight"));
 const utils_1 = require("./utils");
+const GroveSoundSensor_1 = __importDefault(require("./sensors/GroveSoundSensor"));
 const transmitterFactory = (sensorName, threshold) => {
     const checkIfShouldTransmit = utils_1.thresholder(threshold);
     return (reading, unit) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,5 +29,8 @@ const aIOTemperature = parseInt(process.env.AIO_TEMP_SENSOR || '-1');
 const temperatureSensor = new GroveTemperature_1.default(aIOTemperature, transmitterFactory('Temperature', 0.5));
 const aIOLight = parseInt(process.env.AIO_LIGHT_SENSOR || '-1');
 const lightSensor = new GroveLight_1.default(aIOLight, transmitterFactory('Light', 1));
+const aIOSound = parseInt(process.env.AIO_SOUND_SENSOR || '-1');
+const soundSensor = new GroveSoundSensor_1.default(aIOSound, transmitterFactory('Sound', 1));
 temperatureSensor.start();
 lightSensor.start();
+soundSensor.start();
