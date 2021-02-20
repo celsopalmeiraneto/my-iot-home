@@ -45,7 +45,7 @@ var utils_1 = require("./utils");
 var GroveSoundSensor_1 = __importDefault(require("./sensors/GroveSoundSensor"));
 var GroveBacklight_1 = __importDefault(require("./displays/GroveBacklight"));
 var display = new GroveBacklight_1.default();
-var transmitterFactory = function (sensorName, threshold) {
+var transmitterFactory = function (sensorName, threshold, color) {
     var checkIfShouldTransmit = utils_1.thresholder(threshold);
     return function (reading, unit) { return __awaiter(void 0, void 0, void 0, function () {
         var shouldTransmit;
@@ -53,18 +53,31 @@ var transmitterFactory = function (sensorName, threshold) {
             shouldTransmit = checkIfShouldTransmit(reading);
             if (shouldTransmit) {
                 console.log(new Date(), sensorName, reading + " " + unit);
-                display.print(sensorName.substr(0, 4) + ": " + reading + " " + unit);
+                display.print([sensorName, reading + " " + unit], typeof color === 'function' ? color(reading) : color);
             }
             return [2 /*return*/];
         });
     }); };
 };
 var aIOTemperature = parseInt(process.env.AIO_TEMP_SENSOR || '-1');
-var temperatureSensor = new GroveTemperature_1.default(aIOTemperature, transmitterFactory('Temperature', 0.5));
+var temperatureSensor = new GroveTemperature_1.default(aIOTemperature, transmitterFactory('Temperature', 0.5, function (temp) {
+    if (temp <= 10)
+        return [134, 134, 134];
+    if (temp <= 15)
+        return [149, 96, 50];
+    if (temp <= 20)
+        return [159, 77, 6];
+    if (temp <= 25)
+        return [159, 35, 6];
+    return [89, 17, 8];
+}));
 var aIOLight = parseInt(process.env.AIO_LIGHT_SENSOR || '-1');
-var lightSensor = new GroveLight_1.default(aIOLight, transmitterFactory('Light', 1));
+var lightSensor = new GroveLight_1.default(aIOLight, transmitterFactory('Light', 1, [64, 114, 131]));
 var aIOSound = parseInt(process.env.AIO_SOUND_SENSOR || '-1');
-var soundSensor = new GroveSoundSensor_1.default(aIOSound, transmitterFactory('Sound', 50));
+var soundSensor = new GroveSoundSensor_1.default(aIOSound, transmitterFactory('Sound', 50, [162, 210, 132]));
+setInterval(function () {
+    display.print(['Time', new Date().toTimeString()], [90, 116, 121]);
+}, 5000);
 temperatureSensor.start();
 lightSensor.start();
 soundSensor.start();
