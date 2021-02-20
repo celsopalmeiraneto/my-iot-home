@@ -1,3 +1,3 @@
 export interface Transmitter {
-  (reading: number, unit: string): Promise<void>
+  (reading: number, unit: string): Promise<void>;
 }

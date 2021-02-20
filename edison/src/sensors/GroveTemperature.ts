@@ -1,4 +1,4 @@
-import {Aio} from 'mraa';
+import { Aio } from 'mraa';
 import { Transmitter } from '../types';
 import { Sensor } from './Sensor';
 
@@ -6,18 +6,18 @@ const _B = 4275;
 const _R0 = 100000;
 
 export class GroveTemperature extends Sensor {
-  port: Aio
-  
-  constructor(analogicPort: number, transmitter: Transmitter) {
-    super(transmitter, 'C')
+  port: Aio;
 
-    if (analogicPort < 0) throw new Error('Analogic port must be GTE 0')
-    
+  constructor(analogicPort: number, transmitter: Transmitter) {
+    super(transmitter, 'C');
+
+    if (analogicPort < 0) throw new Error('Analogic port must be GTE 0');
+
     this.port = new Aio(analogicPort);
   }
 
   read(): number {
-    return this.temperatureInCelsius()
+    return this.temperatureInCelsius();
   }
 
   temperatureInCelsius(): number {

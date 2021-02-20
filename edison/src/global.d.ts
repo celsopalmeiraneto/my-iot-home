@@ -1,32 +1,36 @@
 declare module 'mraa' {
   export class Aio {
-    constructor(pin: number)
+    constructor(pin: number);
 
-    read(): number
+    read(): number;
   }
 }
 
 declare module 'jsupm_light' {
   export class Light extends Aio {
-    constructor(pin: number)
+    constructor(pin: number);
 
-    /***
+    /**
      * @return value in lux
      */
-    value(): number
+    value(): number;
   }
 }
 
 declare module 'jsupm_mic' {
-  export const thresholdContext: any
+  export const thresholdContext: any;
   export class uint16Array {
-    constructor(len: number)
+    constructor(len: number);
   }
   export class Microphone extends Aio {
-    constructor(pin: number)
+    constructor(pin: number);
 
-    getSampledWindow(freqMS: number, numberOfSamples: number, buffer: uint16Array): number
-    findThreshold: any
-    printGraph: any
+    getSampledWindow(
+      freqMS: number,
+      numberOfSamples: number,
+      buffer: uint16Array
+    ): number;
+    findThreshold: any;
+    printGraph: any;
   }
 }

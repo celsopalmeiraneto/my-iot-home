@@ -13,4 +13,4 @@ function thresholder(threshold: number): (newValue: number) => boolean {
   };
 }
 
-export {thresholder};
+export { thresholder };
