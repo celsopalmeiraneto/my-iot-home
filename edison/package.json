@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsupm_lcm1602": "^1.0.2-src",
+    "jsupm_jhd1313m1": "^1.0.2-src",
     "jsupm_light": "^1.0.2-src",
     "jsupm_mic": "^1.0.2-src",
     "mraa": "^1.9.0"

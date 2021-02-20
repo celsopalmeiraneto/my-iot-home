@@ -4,6 +4,12 @@ declare module 'mraa' {
 
     read(): number;
   }
+
+  export class I2c {
+    constructor(bus: number, raw: boolean);
+
+    writeByte(data: number): void;
+  }
 }
 
 declare module 'jsupm_light' {
@@ -28,9 +34,36 @@ declare module 'jsupm_mic' {
     getSampledWindow(
       freqMS: number,
       numberOfSamples: number,
-      buffer: uint16Array
+      buffer: uint16Array,
     ): number;
     findThreshold: any;
     printGraph: any;
+  }
+}
+
+declare module 'jsupm_jhd1313m1' {
+  export class Jhd1313m1 {
+    constructor(bus: number, lcdAddress: number, rgbAddress: number);
+
+    autoscrollOff(): number;
+    autoscrollOn(): number;
+    backlightOff(): number;
+    backlightOn(): number;
+    clear(): number;
+    createChar(charSlot: number, charData: Uint8Array);
+    cursorBlinkOff(): number;
+    cursorBlinkOn(): number;
+    cursorOff(): number;
+    cursorOn(): number;
+    entryLeftToRight(): number;
+    entryRightToLeft(): number;
+    displayOff(): number;
+    displayOn(): number;
+    scroll(direction: boolean): number;
+    scrollDisplayLeft(): number;
+    scrollDisplayRight(): number;
+    setColor(r: number, g: number, b: number): number;
+    setCursor(row: number, column: number): number;
+    write(msg: string): number;
   }
 }

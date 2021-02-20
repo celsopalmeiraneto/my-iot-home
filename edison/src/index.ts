@@ -3,6 +3,9 @@ import GroveLight from './sensors/GroveLight';
 import { Transmitter } from './types';
 import { thresholder } from './utils';
 import GroveSoundSensor from './sensors/GroveSoundSensor';
+import GroveBacklight from './displays/GroveBacklight';
+
+const display = new GroveBacklight();
 
 const transmitterFactory = (
   sensorName: string,
@@ -14,6 +17,7 @@ const transmitterFactory = (
     const shouldTransmit = checkIfShouldTransmit(reading);
     if (shouldTransmit) {
       console.log(new Date(), sensorName, `${reading} ${unit}`);
+      display.print(`${sensorName.substr(0, 4)}: ${reading} ${unit}`);
     }
   };
 };

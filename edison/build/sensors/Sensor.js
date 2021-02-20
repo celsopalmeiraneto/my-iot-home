@@ -1,15 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Sensor = void 0;
-class Sensor {
-    constructor(transmitter, unit) {
+var Sensor = /** @class */ (function () {
+    function Sensor(transmitter, unit) {
         this.transmitter = transmitter;
         this.unit = unit;
     }
-    start() {
-        setInterval(() => {
-            void this.transmitter(this.read(), this.unit);
+    Sensor.prototype.start = function () {
+        var _this = this;
+        setInterval(function () {
+            void _this.transmitter(_this.read(), _this.unit);
         }, 1000);
-    }
-}
+    };
+    return Sensor;
+}());
 exports.Sensor = Sensor;
