@@ -1,3 +1,9 @@
+export type ReadingValue = number | string;
+export interface Reading {
+  value: ReadingValue;
+  unit: string;
+}
+
 export interface Transmitter {
-  (reading: number, unit: string): Promise<void>;
+  (reading: ReadingValue, unit: Reading['unit']): Promise<void>;
 }
